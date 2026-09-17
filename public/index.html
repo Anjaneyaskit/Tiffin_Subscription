@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TiffinsDirect - Home-Style Tiffin & Subscription Management</title>
+    <title>TiffinsDirect Enterprise - Advanced Management & Feedback</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans">
-
-    <!-- Navbar -->
     <nav class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-bold text-orange-600">🍱 TiffinsDirect</h1>
+            <h1 class="text-2xl font-bold text-orange-600">🍱 TiffinsDirect <span class="text-xs bg-orange-100 text-orange-700 px-2 py-0.5 rounded-full uppercase">Enterprise Pro</span></h1>
             <div id="nav-auth" class="space-x-4">
                 <button onclick="showModal('login-modal')" class="text-slate-600 hover:text-orange-600 font-medium">Login</button>
                 <button onclick="showModal('register-modal')" class="bg-orange-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-orange-700">Get Started</button>
@@ -19,68 +17,77 @@
         </div>
     </nav>
 
-    <!-- Landing Page View -->
     <div id="landing-view">
         <header class="max-w-7xl mx-auto px-4 py-20 text-center">
             <span class="bg-orange-100 text-orange-700 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Homely Nutrition, Zero Waste</span>
             <h1 class="text-5xl font-extrabold mt-4 tracking-tight">Healthy, Home-Cooked Lunches Delivered Daily</h1>
-            <p class="mt-4 text-xl text-slate-600 max-w-2xl mx-auto">Flexible weekday meal subscriptions. Traveling or fasting? Pause with one click and never pay for meals you miss.</p>
+            <p class="mt-4 text-xl text-slate-600 max-w-2xl mx-auto">Flexible weekday meal subscriptions with live menu updates, feedback ratings, and automated billing.</p>
             <div class="mt-8 flex justify-center gap-4">
                 <button onclick="showModal('register-modal')" class="bg-orange-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:bg-orange-700">Subscribe Now</button>
                 <button onclick="showModal('login-modal')" class="border border-slate-300 px-6 py-3 rounded-xl font-semibold hover:bg-slate-100">Owner / Customer Login</button>
             </div>
         </header>
 
-        <section class="bg-white py-16 border-t border-slate-100">
-            <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-8">
-                <div class="p-6 rounded-2xl bg-orange-50/50 border border-orange-100">
-                    <div class="text-3xl mb-3">📅</div>
-                    <h3 class="text-lg font-bold">Flexible Pause & Resume</h3>
-                    <p class="mt-2 text-sm text-slate-600">Off to a trip or visiting family? Pause deliveries instantly. Your calendar and bill adjust automatically.</p>
+        <section class="max-w-4xl mx-auto px-4 mb-16">
+            <div class="bg-gradient-to-r from-orange-500 to-amber-500 rounded-2xl p-6 text-white shadow-lg flex flex-col md:flex-row justify-between items-center">
+                <div>
+                    <span class="bg-white/20 text-xs px-3 py-1 rounded-full uppercase tracking-wider font-semibold">Today's Special</span>
+                    <h3 id="publicMenuTitle" class="text-2xl font-bold mt-2">Loading Today's Menu...</h3>
+                    <p id="publicMenuItems" class="text-orange-100 text-sm mt-1">Please check back shortly.</p>
                 </div>
-                <div class="p-6 rounded-2xl bg-orange-50/50 border border-orange-100">
-                    <div class="text-3xl mb-3">💰</div>
-                    <h3 class="text-lg font-bold">Fair Pro-Rated Billing</h3>
-                    <p class="mt-2 text-sm text-slate-600">At month-end, owners instantly generate exact pro-rated bills based strictly on days meals were delivered.</p>
-                </div>
-                <div class="p-6 rounded-2xl bg-orange-50/50 border border-orange-100">
-                    <div class="text-3xl mb-3">🔍</div>
-                    <h3 class="text-lg font-bold">Instant Phone Lookup</h3>
-                    <p class="mt-2 text-sm text-slate-600">Kitchen owners can look up any subscriber instantly by phone number to check active or paused status.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-16 max-w-7xl mx-auto px-4">
-            <h2 class="text-2xl font-bold text-center mb-10">🚀 Roadmap: Next Features We Would Build</h2>
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="border p-6 rounded-xl bg-white shadow-sm">
-                    <span class="text-orange-600 font-bold">01</span>
-                    <h4 class="font-bold mt-2">WhatsApp Bot Integration</h4>
-                    <p class="text-sm text-slate-600 mt-1">Allow customers to send a simple WhatsApp message to pause their tiffin for the day.</p>
-                </div>
-                <div class="border p-6 rounded-xl bg-white shadow-sm">
-                    <span class="text-orange-600 font-bold">02</span>
-                    <h4 class="font-bold mt-2">Dynamic Menu Customization</h4>
-                    <p class="text-sm text-slate-600 mt-1">Let subscribers select North Indian, South Indian, or Jain meal preferences weekly.</p>
-                </div>
-                <div class="border p-6 rounded-xl bg-white shadow-sm">
-                    <span class="text-orange-600 font-bold">03</span>
-                    <h4 class="font-bold mt-2">Delivery Driver Route Map</h4>
-                    <p class="text-sm text-slate-600 mt-1">Optimized morning drop-off maps for delivery agents based on active customer locations.</p>
+                <div class="mt-4 md:mt-0 text-right">
+                    <span class="bg-white text-orange-700 font-bold px-4 py-2 rounded-xl text-sm shadow">Fresh & Hot 🚚</span>
                 </div>
             </div>
         </section>
     </div>
 
-    <!-- Owner / Customer Dashboard View -->
     <div id="dashboard-view" class="hidden max-w-7xl mx-auto px-4 py-8">
         <div class="flex justify-between items-center mb-6">
             <div>
                 <h2 id="welcome-msg" class="text-2xl font-bold">Dashboard</h2>
-                <p class="text-sm text-slate-500">Manage subscriptions, pauses, and pro-rated billing.</p>
+                <p class="text-sm text-slate-500">Manage subscriptions, feedback ratings, and billing.</p>
             </div>
             <button onclick="logout()" class="bg-red-50 text-red-600 px-4 py-2 rounded-lg font-medium hover:bg-red-100">Logout</button>
+        </div>
+
+        <div id="analytics-section" class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                <p class="text-sm text-slate-500 font-medium">Active Subscribers</p>
+                <h3 id="statActive" class="text-3xl font-extrabold text-green-600 mt-1">0</h3>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                <p class="text-sm text-slate-500 font-medium">Paused Subscriptions</p>
+                <h3 id="statPaused" class="text-3xl font-extrabold text-amber-600 mt-1">0</h3>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                <p class="text-sm text-slate-500 font-medium">Projected Revenue</p>
+                <h3 id="statRevenue" class="text-3xl font-extrabold text-orange-600 mt-1">₹0</h3>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                <p class="text-sm text-slate-500 font-medium">Customer Rating</p>
+                <h3 id="statRating" class="text-3xl font-extrabold text-yellow-500 mt-1">⭐ 5.0</h3>
+            </div>
+        </div>
+
+        <!-- Customer Feedback Submission & View Card -->
+        <div id="feedback-card" class="bg-white p-6 rounded-xl shadow-sm border mb-8">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-bold">⭐ Tiffin Feedback & Reviews</h3>
+                <button onclick="showModal('feedback-modal')" class="bg-orange-600 text-white text-xs px-4 py-2 rounded-lg font-semibold hover:bg-orange-700">Leave Feedback</button>
+            </div>
+            <div id="feedbackList" class="grid md:grid-cols-3 gap-4">
+                <p class="text-sm text-slate-400">Loading reviews...</p>
+            </div>
+        </div>
+
+        <div id="owner-menu-card" class="hidden bg-white p-6 rounded-xl shadow-sm border mb-8">
+            <h3 class="text-lg font-bold mb-4">📢 Update Today's Menu</h3>
+            <form onsubmit="handleUpdateMenu(event)" class="grid md:grid-cols-3 gap-4">
+                <input type="text" id="menuTitleInput" placeholder="Menu Title (e.g., Special Thali)" required class="border p-3 rounded-lg">
+                <input type="text" id="menuItemsInput" placeholder="Items (e.g., Dal, Paneer, Rice)" required class="border p-3 rounded-lg md:col-span-2">
+                <button type="submit" class="bg-orange-600 text-white font-semibold py-2.5 rounded-lg hover:bg-orange-700 md:col-span-3">Publish Menu</button>
+            </form>
         </div>
 
         <div class="bg-white p-4 rounded-xl shadow-sm border mb-6 flex flex-wrap gap-4 items-center justify-between">
@@ -171,20 +178,120 @@
         </div>
     </div>
 
+    <div id="feedback-modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div class="bg-white p-8 rounded-2xl w-full max-w-md relative">
+            <h3 class="text-xl font-bold mb-4">Rate Today's Tiffin</h3>
+            <form onsubmit="handleFeedbackSubmit(event)" class="space-y-4">
+                <select id="feedbackRating" required class="w-full border p-3 rounded-lg">
+                    <option value="5">⭐⭐⭐⭐⭐ (5/5 - Excellent)</option>
+                    <option value="4">⭐⭐⭐⭐ (4/5 - Very Good)</option>
+                    <option value="3">⭐⭐⭐ (3/5 - Average)</option>
+                    <option value="2">⭐⭐ (2/5 - Below Average)</option>
+                    <option value="1">⭐ (1/5 - Poor)</option>
+                </select>
+                <textarea id="feedbackComment" placeholder="Write your review or comment..." class="w-full border p-3 rounded-lg" rows="3"></textarea>
+                <button type="submit" class="w-full bg-orange-600 text-white p-3 rounded-lg font-semibold hover:bg-orange-700">Submit Review</button>
+            </form>
+            <button onclick="hideModals()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">✕</button>
+        </div>
+    </div>
+
     <script>
         let currentPage = 1;
         const limit = 5;
         let token = localStorage.getItem('token') || '';
         let currentUser = JSON.parse(localStorage.getItem('user')) || null;
 
-        function initApp() {
+        async function initApp() {
+            loadPublicMenu();
             if (token && currentUser) {
                 document.getElementById('landing-view').classList.add('hidden');
                 document.getElementById('dashboard-view').classList.remove('hidden');
                 document.getElementById('nav-auth').innerHTML = `<span class="font-semibold text-slate-700">Hello, ${currentUser.name}</span>`;
-                document.getElementById('welcome-msg').innerText = currentUser.role === 'owner' ? 'Owner Dashboard - All Customers' : 'My Subscription & Billing';
+                document.getElementById('welcome-msg').innerText = currentUser.role === 'owner' ? 'Enterprise Pro Owner Dashboard' : 'My Subscription & Billing';
+                
+                if (currentUser.role === 'owner') {
+                    document.getElementById('owner-menu-card').classList.remove('hidden');
+                }
+                loadAnalytics();
                 loadCustomers();
+                loadFeedbacks();
             }
+        }
+
+        async function loadPublicMenu() {
+            const res = await fetch('/api/menu');
+            const menu = await res.json();
+            document.getElementById('publicMenuTitle').innerText = menu.title;
+            document.getElementById('publicMenuItems').innerText = menu.items;
+        }
+
+        async function loadAnalytics() {
+            const res = await fetch('/api/analytics', { headers: { 'Authorization': `Bearer ${token}` } });
+            const data = await res.json();
+            if (res.ok) {
+                document.getElementById('statActive').innerText = data.activeCount || 0;
+                document.getElementById('statPaused').innerText = data.pausedCount || 0;
+                document.getElementById('statRevenue').innerText = `₹${data.totalPotentialRevenue || 0}`;
+                document.getElementById('statRating').innerText = `⭐ ${data.avgRating} (${data.totalReviews})`;
+            }
+        }
+
+        async function loadFeedbacks() {
+            const res = await fetch('/api/feedbacks', { headers: { 'Authorization': `Bearer ${token}` } });
+            const list = await res.json();
+            const container = document.getElementById('feedbackList');
+            container.innerHTML = '';
+            if (list.length === 0) {
+                container.innerHTML = '<p class="text-sm text-slate-400">No reviews yet.</p>';
+                return;
+            }
+            list.forEach(item => {
+                const div = document.createElement('div');
+                div.className = "border p-4 rounded-xl bg-slate-50 text-sm";
+                div.innerHTML = `
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="font-bold text-slate-700">${item.name}</span>
+                        <span class="text-yellow-500 font-bold">${'⭐'.repeat(item.rating)}</span>
+                    </div>
+                    <p class="text-slate-600 mt-1">${item.comment || 'No comment provided.'}</p>
+                    <span class="text-xs text-slate-400 mt-2 block">${item.created_at}</span>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        async function handleFeedbackSubmit(e) {
+            e.preventDefault();
+            const res = await fetch('/api/feedback', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                body: JSON.stringify({
+                    rating: parseInt(document.getElementById('feedbackRating').value),
+                    comment: document.getElementById('feedbackComment').value
+                })
+            });
+            const data = await res.json();
+            if (res.ok) {
+                alert(data.message);
+                hideModals();
+                loadFeedbacks();
+                loadAnalytics();
+            } else alert(data.error);
+        }
+
+        async function handleUpdateMenu(e) {
+            e.preventDefault();
+            const res = await fetch('/api/menu', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                body: JSON.stringify({
+                    title: document.getElementById('menuTitleInput').value,
+                    items: document.getElementById('menuItemsInput').value
+                })
+            });
+            const data = await res.json();
+            if (res.ok) { alert(data.message); loadPublicMenu(); } else alert(data.error);
         }
 
         function showModal(id) { document.getElementById(id).classList.remove('hidden'); }
@@ -203,8 +310,7 @@
                 })
             });
             const data = await res.json();
-            if (res.ok) { alert('Registered successfully! Please login.'); hideModals(); showModal('login-modal'); }
-            else alert(data.error);
+            if (res.ok) { alert('Registered successfully! Please login.'); hideModals(); showModal('login-modal'); } else alert(data.error);
         }
 
         async function handleLogin(e) {
@@ -239,19 +345,10 @@
                 })
             });
             const data = await res.json();
-            if (res.ok) {
-                alert(data.message);
-                hideModals();
-                showModal('login-modal');
-            } else {
-                alert(data.error);
-            }
+            if (res.ok) { alert(data.message); hideModals(); showModal('login-modal'); } else alert(data.error);
         }
 
-        function logout() {
-            localStorage.clear();
-            location.reload();
-        }
+        function logout() { localStorage.clear(); location.reload(); }
 
         async function loadCustomers() {
             const search = document.getElementById('searchInput').value;
@@ -293,8 +390,7 @@
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                 body: JSON.stringify({ subscriptionId: subId, status: newStatus })
             });
-            if (res.ok) loadCustomers();
-            else alert('Failed to update status');
+            if (res.ok) { loadCustomers(); loadAnalytics(); } else alert('Failed to update status');
         }
 
         function changePage(direction) {

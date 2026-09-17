@@ -13,13 +13,11 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Initialize SQLite Database
 const db = new sqlite3.Database('./tiffin.db', (err) => {
   if (err) console.error('Database connection error:', err.message);
   else console.log('Connected to SQLite database.');
 });
 
-// Create Tables
 db.serialize(() => {
   db.run(`CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -46,9 +44,24 @@ db.serialize(() => {
     days_paused INTEGER,
     FOREIGN KEY(subscription_id) REFERENCES subscriptions(id)
   )`);
+
+  db.run(`CREATE TABLE IF NOT EXISTS menus (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    menu_date TEXT UNIQUE,
+    title TEXT,
+    items TEXT
+  )`);
+
+  db.run(`CREATE TABLE IF NOT EXISTS feedbacks (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER,
+    rating INTEGER,
+    comment TEXT,
+    created_at TEXT,
+    FOREIGN KEY(user_id) REFERENCES users(id)
+  )`);
 });
 
-// Middleware for JWT Authentication
 function authenticateToken(req, res, next) {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
@@ -61,9 +74,7 @@ function authenticateToken(req, res, next) {
   });
 }
 
-// --- REST APIS ---
-
-// 1. User Registration
+// 1. Register
 app.post('/api/register', async (req, res) => {
   const { name, phone, password, role } = req.body;
   if (!name || !phone || !password) return res.status(400).json({ error: 'All fields required' });
@@ -83,7 +94,7 @@ app.post('/api/register', async (req, res) => {
   }
 });
 
-// 2. User Login
+// 2. Login
 app.post('/api/login', (req, res) => {
   const { phone, password } = req.body;
   db.get(`SELECT * FROM users WHERE phone = ?`, [phone], async (err, user) => {
@@ -97,7 +108,7 @@ app.post('/api/login', (req, res) => {
   });
 });
 
-// 3. Forgot / Reset Password
+// 3. Forgot Password
 app.post('/api/forgot-password', (req, res) => {
   const { phone, newPassword } = req.body;
   if (!phone || !newPassword) return res.status(400).json({ error: 'Phone and new password are required' });
@@ -113,7 +124,42 @@ app.post('/api/forgot-password', (req, res) => {
   });
 });
 
-// 4. Get Customers with Search, Pagination, Sorting & Pro-Rated Billing
+// 4. Analytics & Average Rating
+app.get('/api/analytics', authenticateToken, (req, res) => {
+  db.get(`
+    SELECT 
+      SUM(CASE WHEN status = 'active' THEN 1 ELSE 0 END) as activeCount,
+      SUM(CASE WHEN status = 'paused' THEN 1 ELSE 0 END) as pausedCount,
+      COUNT(*) as totalCount,
+      SUM(plan_price) as totalPotentialRevenue
+    FROM subscriptions
+  `, (err, row) => {
+    if (err) return res.status(500).json({ error: err.message });
+    db.get(`SELECT AVG(rating) as avgRating, COUNT(*) as totalReviews FROM feedbacks`, (err2, feedbackRow) => {
+      res.json({ ...row, avgRating: feedbackRow?.avgRating ? feedbackRow.avgRating.toFixed(1) : '5.0', totalReviews: feedbackRow?.totalReviews || 0 });
+    });
+  });
+});
+
+// 5. Daily Menu
+app.get('/api/menu', (req, res) => {
+  db.get(`SELECT * FROM menus ORDER BY id DESC LIMIT 1`, (err, row) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json(row || { title: 'Standard Home Thali', items: 'Dal Tadka, Shahi Paneer, 4 Chapatis, Jeera Rice, Salad' });
+  });
+});
+
+app.post('/api/menu', authenticateToken, (req, res) => {
+  if (req.user.role !== 'owner') return res.status(403).json({ error: 'Unauthorized' });
+  const { title, items } = req.body;
+
+  db.run(`INSERT OR REPLACE INTO menus (id, menu_date, title, items) VALUES (1, DATE('now'), ?, ?)`, [title, items], (err) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json({ message: 'Daily menu updated successfully' });
+  });
+});
+
+// 6. Customers & Pro-Rated Billing
 app.get('/api/customers', authenticateToken, (req, res) => {
   const { search = '', status = '', page = 1, limit = 5, sortBy = 'name', order = 'ASC' } = req.query;
   const offset = (page - 1) * limit;
@@ -157,7 +203,7 @@ app.get('/api/customers', authenticateToken, (req, res) => {
   });
 });
 
-// 5. Toggle Subscription Pause/Resume
+// 7. Toggle Subscription Pause/Resume
 app.post('/api/subscription/toggle', authenticateToken, (req, res) => {
   const { subscriptionId, status, daysPaused = 1 } = req.body;
   
@@ -171,6 +217,30 @@ app.post('/api/subscription/toggle', authenticateToken, (req, res) => {
   });
 });
 
+// 8. Customer Feedback / Ratings Subsystem
+app.post('/api/feedback', authenticateToken, (req, res) => {
+  const { rating, comment } = req.body;
+  if (!rating) return res.status(400).json({ error: 'Rating is required' });
+
+  db.run(`INSERT INTO feedbacks (user_id, rating, comment, created_at) VALUES (?, ?, ?, DATE('now'))`, 
+    [req.user.id, rating, comment || ''], (err) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json({ message: 'Feedback submitted successfully. Thank you!' });
+  });
+});
+
+app.get('/api/feedbacks', authenticateToken, (req, res) => {
+  db.all(`
+    SELECT f.id, f.rating, f.comment, f.created_at, u.name 
+    FROM feedbacks f 
+    JOIN users u ON f.user_id = u.id 
+    ORDER BY f.id DESC LIMIT 10
+  `, (err, rows) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json(rows);
+  });
+});
+
 app.listen(PORT, () => {
-  console.log(`Tiffin Service server running on http://localhost:${PORT}`);
+  console.log(`Enterprise Advanced Server running on http://localhost:${PORT}`);
 });
