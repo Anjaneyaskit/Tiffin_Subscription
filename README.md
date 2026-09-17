@@ -1,21 +1,17 @@
-# Tiffin_Subscription
-# 🍱 TiffinsDirect - Home-Style Tiffin & Subscription Management
+# Full-Stack Tiffin Service Project
 
-A full-stack solution for tiffin service owners to manage customer monthly plans, handle dynamic pause/resume days for travel/festivals, and automatically calculate exact pro-rated bills at month-end.
+## Overview
+A comprehensive full-stack application designed to manage daily tiffin subscriptions, dynamic menus, real-time analytics, and customer feedback.
 
-## 🚀 Tech Stack
-- **Backend:** Node.js, Express.js
-- **Database:** SQLite (Relational Schema with Users, Subscriptions, and Pause Logs)
-- **Frontend:** HTML5, Tailwind CSS, Vanilla JavaScript
+## Key Features & Special Technical Twists
+* **Morning Clock Delivery Notifications:** Automated trigger system handling time-sensitive delivery alerts at the start of the cycle.
+* **Mid-Cycle Subscription Transfers:** Advanced logic allowing users to switch plans mid-way through a billing or meal cycle without breaking constraints.
+* **Customer Data Importer:** Bulk ingestion utility for parsing structured files, validating fields, and resolving duplicate entries.
+* **Daily Menu Gallery & Feedback Subsystem:** Interactive catalog paired with user rating tools feeding real-time metric dashboards.
+* **Secure Authentication:** Complete user lifecycle management featuring secure password recovery protocols.
 
-
-
-## 🔌 REST API Endpoints
-
-| Method | Endpoint | Description |
-| :--- | :--- | :--- |
-| `POST` | `/api/register` | Register new customer or tiffin owner |
-| `POST` | `/api/login` | Authenticate user and return JWT token |
-| `POST` | `/api/forgot-password` | Reset user password via phone verification |
-| `GET` | `/api/customers` | Search customers by phone/name, filter by status, pagination & sorting |
-| `POST` | `/api/subscription/toggle` | Pause or resume a customer's subscription and log pause days |
+## Setup & Installation
+1. Clone the repository.
+2. Install dependencies for backend and frontend.
+3. Configure environment variables (database credentials, mail server tokens).
+4. Run migrations and start the server.
