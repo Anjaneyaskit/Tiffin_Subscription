@@ -3,41 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TiffinsDirect Enterprise - Advanced Management & Feedback</title>
+    <title>TiffinsDirect Enterprise Pro - Daily Homestyle Meals</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans">
     <nav class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-bold text-orange-600">🍱 TiffinsDirect <span class="text-xs bg-orange-100 text-orange-700 px-2 py-0.5 rounded-full uppercase">Enterprise Pro</span></h1>
+            <h1 class="text-2xl font-bold text-orange-600 flex items-center gap-2">🍱 TiffinsDirect <span class="text-xs bg-orange-100 text-orange-700 px-2.5 py-1 rounded-full uppercase tracking-wider font-semibold">Enterprise Pro</span></h1>
             <div id="nav-auth" class="space-x-4">
                 <button onclick="showModal('login-modal')" class="text-slate-600 hover:text-orange-600 font-medium">Login</button>
-                <button onclick="showModal('register-modal')" class="bg-orange-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-orange-700">Get Started</button>
+                <button onclick="showModal('register-modal')" class="bg-orange-600 text-white px-4 py-2 rounded-xl font-medium hover:bg-orange-700 shadow-sm transition">Get Started</button>
             </div>
         </div>
     </nav>
 
     <div id="landing-view">
-        <header class="max-w-7xl mx-auto px-4 py-20 text-center">
-            <span class="bg-orange-100 text-orange-700 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Homely Nutrition, Zero Waste</span>
-            <h1 class="text-5xl font-extrabold mt-4 tracking-tight">Healthy, Home-Cooked Lunches Delivered Daily</h1>
-            <p class="mt-4 text-xl text-slate-600 max-w-2xl mx-auto">Flexible weekday meal subscriptions with live menu updates, feedback ratings, and automated billing.</p>
+        <header class="max-w-7xl mx-auto px-4 py-16 text-center">
+            <span class="bg-orange-100 text-orange-700 text-xs font-semibold px-3 py-1.5 rounded-full uppercase tracking-wider">Homely Nutrition • Zero Waste • Pro-Rated Daily Billing</span>
+            <h1 class="text-5xl font-extrabold mt-4 tracking-tight text-slate-900">Healthy, Home-Cooked Lunches Delivered Daily</h1>
+            <p class="mt-4 text-xl text-slate-600 max-w-2xl mx-auto">Flexible weekday meal subscriptions with live menu updates, automated pause-resume billing, and instant notifications.</p>
             <div class="mt-8 flex justify-center gap-4">
-                <button onclick="showModal('register-modal')" class="bg-orange-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:bg-orange-700">Subscribe Now</button>
-                <button onclick="showModal('login-modal')" class="border border-slate-300 px-6 py-3 rounded-xl font-semibold hover:bg-slate-100">Owner / Customer Login</button>
+                <button onclick="showModal('register-modal')" class="bg-orange-600 text-white px-6 py-3.5 rounded-xl font-semibold shadow-lg hover:bg-orange-700 transition">Subscribe Now</button>
+                <button onclick="showModal('login-modal')" class="border border-slate-300 bg-white px-6 py-3.5 rounded-xl font-semibold hover:bg-slate-100 transition">Owner / Customer Login</button>
             </div>
         </header>
 
-        <section class="max-w-4xl mx-auto px-4 mb-16">
-            <div class="bg-gradient-to-r from-orange-500 to-amber-500 rounded-2xl p-6 text-white shadow-lg flex flex-col md:flex-row justify-between items-center">
-                <div>
-                    <span class="bg-white/20 text-xs px-3 py-1 rounded-full uppercase tracking-wider font-semibold">Today's Special</span>
-                    <h3 id="publicMenuTitle" class="text-2xl font-bold mt-2">Loading Today's Menu...</h3>
-                    <p id="publicMenuItems" class="text-orange-100 text-sm mt-1">Please check back shortly.</p>
-                </div>
-                <div class="mt-4 md:mt-0 text-right">
-                    <span class="bg-white text-orange-700 font-bold px-4 py-2 rounded-xl text-sm shadow">Fresh & Hot 🚚</span>
-                </div>
+        <!-- Real-Time Interactive Food Photo Gallery & Weekly Menu Showcase -->
+        <section class="max-w-7xl mx-auto px-4 mb-20">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-extrabold text-slate-900">🍽️ This Week's Homestyle Menu & Gallery</h2>
+                <p class="text-slate-500 mt-2">Prepared with pure desi ghee and love. Freshly photographed daily.</p>
+            </div>
+            <div id="publicWeeklyMenuGrid" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                <p class="text-slate-400 text-center col-span-full">Loading live weekly menu...</p>
             </div>
         </section>
     </div>
@@ -46,54 +44,74 @@
         <div class="flex justify-between items-center mb-6">
             <div>
                 <h2 id="welcome-msg" class="text-2xl font-bold">Dashboard</h2>
-                <p class="text-sm text-slate-500">Manage subscriptions, feedback ratings, and billing.</p>
+                <p class="text-sm text-slate-500">Manage subscriptions, notifications, transfers, and billing.</p>
             </div>
-            <button onclick="logout()" class="bg-red-50 text-red-600 px-4 py-2 rounded-lg font-medium hover:bg-red-100">Logout</button>
+            <button onclick="logout()" class="bg-red-50 text-red-600 px-4 py-2 rounded-xl font-medium hover:bg-red-100 transition">Logout</button>
         </div>
 
         <div id="analytics-section" class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
                 <p class="text-sm text-slate-500 font-medium">Active Subscribers</p>
                 <h3 id="statActive" class="text-3xl font-extrabold text-green-600 mt-1">0</h3>
             </div>
-            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
                 <p class="text-sm text-slate-500 font-medium">Paused Subscriptions</p>
                 <h3 id="statPaused" class="text-3xl font-extrabold text-amber-600 mt-1">0</h3>
             </div>
-            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
                 <p class="text-sm text-slate-500 font-medium">Projected Revenue</p>
                 <h3 id="statRevenue" class="text-3xl font-extrabold text-orange-600 mt-1">₹0</h3>
             </div>
-            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
                 <p class="text-sm text-slate-500 font-medium">Customer Rating</p>
                 <h3 id="statRating" class="text-3xl font-extrabold text-yellow-500 mt-1">⭐ 5.0</h3>
             </div>
         </div>
 
-        <!-- Customer Feedback Submission & View Card -->
-        <div id="feedback-card" class="bg-white p-6 rounded-xl shadow-sm border mb-8">
+        <!-- Owner Advanced Control Center (Twists 1, 2, 3) -->
+        <div id="owner-control-center" class="hidden grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between">
+                <div>
+                    <span class="bg-blue-50 text-blue-700 text-xs font-semibold px-2.5 py-1 rounded-full uppercase">Level 1 Twist</span>
+                    <h3 class="text-lg font-bold mt-3">Clock & Notifications</h3>
+                    <p class="text-xs text-slate-500 mt-1">Simulate morning clock event to trigger active weekday delivery notifications.</p>
+                </div>
+                <button onclick="triggerClock()" class="mt-4 bg-blue-600 text-white text-sm font-semibold py-2.5 rounded-xl hover:bg-blue-700 transition">Run Morning /Clock</button>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between">
+                <div>
+                    <span class="bg-purple-50 text-purple-700 text-xs font-semibold px-2.5 py-1 rounded-full uppercase">Level 2 Twist</span>
+                    <h3 class="text-lg font-bold mt-3">Mid-Cycle Transfer</h3>
+                    <p class="text-xs text-slate-500 mt-1">Transfer an active subscription to a new recipient seamlessly.</p>
+                </div>
+                <button onclick="showModal('transfer-modal')" class="mt-4 bg-purple-600 text-white text-sm font-semibold py-2.5 rounded-xl hover:bg-purple-700 transition">Transfer Subscription</button>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between">
+                <div>
+                    <span class="bg-emerald-50 text-emerald-700 text-xs font-semibold px-2.5 py-1 rounded-full uppercase">Level 3 Twist</span>
+                    <h3 class="text-lg font-bold mt-3">Messy Data Importer</h3>
+                    <p class="text-xs text-slate-500 mt-1">Bulk ingest customer lists with auto-deduplication & cleaning reports.</p>
+                </div>
+                <button onclick="showModal('import-modal')" class="mt-4 bg-emerald-600 text-white text-sm font-semibold py-2.5 rounded-xl hover:bg-emerald-700 transition">Import Customers</button>
+            </div>
+        </div>
+
+        <div id="feedback-card" class="bg-white p-6 rounded-2xl shadow-sm border mb-8">
             <div class="flex justify-between items-center mb-4">
                 <h3 class="text-lg font-bold">⭐ Tiffin Feedback & Reviews</h3>
-                <button onclick="showModal('feedback-modal')" class="bg-orange-600 text-white text-xs px-4 py-2 rounded-lg font-semibold hover:bg-orange-700">Leave Feedback</button>
+                <button onclick="showModal('feedback-modal')" class="bg-orange-600 text-white text-xs px-4 py-2 rounded-xl font-semibold hover:bg-orange-700">Leave Feedback</button>
             </div>
             <div id="feedbackList" class="grid md:grid-cols-3 gap-4">
                 <p class="text-sm text-slate-400">Loading reviews...</p>
             </div>
         </div>
 
-        <div id="owner-menu-card" class="hidden bg-white p-6 rounded-xl shadow-sm border mb-8">
-            <h3 class="text-lg font-bold mb-4">📢 Update Today's Menu</h3>
-            <form onsubmit="handleUpdateMenu(event)" class="grid md:grid-cols-3 gap-4">
-                <input type="text" id="menuTitleInput" placeholder="Menu Title (e.g., Special Thali)" required class="border p-3 rounded-lg">
-                <input type="text" id="menuItemsInput" placeholder="Items (e.g., Dal, Paneer, Rice)" required class="border p-3 rounded-lg md:col-span-2">
-                <button type="submit" class="bg-orange-600 text-white font-semibold py-2.5 rounded-lg hover:bg-orange-700 md:col-span-3">Publish Menu</button>
-            </form>
-        </div>
-
-        <div class="bg-white p-4 rounded-xl shadow-sm border mb-6 flex flex-wrap gap-4 items-center justify-between">
+        <div class="bg-white p-4 rounded-2xl shadow-sm border mb-6 flex flex-wrap gap-4 items-center justify-between">
             <div class="flex gap-4 items-center flex-1">
-                <input type="text" id="searchInput" placeholder="Search by name or phone..." oninput="loadCustomers()" class="border px-4 py-2 rounded-lg w-full max-w-sm focus:outline-orange-500">
-                <select id="statusFilter" onchange="loadCustomers()" class="border px-4 py-2 rounded-lg">
+                <input type="text" id="searchInput" placeholder="Search by name or phone..." oninput="loadCustomers()" class="border px-4 py-2.5 rounded-xl w-full max-w-sm focus:outline-orange-500 text-sm">
+                <select id="statusFilter" onchange="loadCustomers()" class="border px-4 py-2.5 rounded-xl text-sm">
                     <option value="">All Status</option>
                     <option value="active">Active</option>
                     <option value="paused">Paused</option>
@@ -101,17 +119,17 @@
             </div>
             <div class="flex items-center gap-2">
                 <label class="text-sm text-slate-500">Sort By:</label>
-                <select id="sortBy" onchange="loadCustomers()" class="border px-3 py-2 rounded-lg text-sm">
+                <select id="sortBy" onchange="loadCustomers()" class="border px-3 py-2.5 rounded-xl text-sm">
                     <option value="name">Name</option>
                     <option value="phone">Phone</option>
                 </select>
             </div>
         </div>
 
-        <div class="bg-white rounded-xl shadow-sm border overflow-hidden">
+        <div class="bg-white rounded-2xl shadow-sm border overflow-hidden">
             <table class="w-full text-left border-collapse">
                 <thead>
-                    <tr class="bg-slate-100 text-slate-600 text-sm font-semibold border-b">
+                    <tr class="bg-slate-50 text-slate-600 text-sm font-semibold border-b">
                         <th class="p-4">Customer Name</th>
                         <th class="p-4">Phone</th>
                         <th class="p-4">Status</th>
@@ -125,8 +143,8 @@
             <div class="p-4 flex justify-between items-center bg-slate-50 border-t">
                 <span id="pageInfo" class="text-sm text-slate-500">Page 1 of 1</span>
                 <div class="space-x-2">
-                    <button onclick="changePage(-1)" class="px-3 py-1 border rounded bg-white hover:bg-slate-100">Previous</button>
-                    <button onclick="changePage(1)" class="px-3 py-1 border rounded bg-white hover:bg-slate-100">Next</button>
+                    <button onclick="changePage(-1)" class="px-3 py-1.5 border rounded-xl bg-white hover:bg-slate-100 text-sm">Previous</button>
+                    <button onclick="changePage(1)" class="px-3 py-1.5 border rounded-xl bg-white hover:bg-slate-100 text-sm">Next</button>
                 </div>
             </div>
         </div>
@@ -134,63 +152,75 @@
 
     <!-- Modals -->
     <div id="login-modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-        <div class="bg-white p-8 rounded-2xl w-full max-w-md relative">
+        <div class="bg-white p-8 rounded-3xl w-full max-w-md relative shadow-2xl">
             <h3 class="text-xl font-bold mb-4">Login to TiffinsDirect</h3>
             <form onsubmit="handleLogin(event)" class="space-y-4">
-                <input type="text" id="loginPhone" placeholder="Phone Number" required class="w-full border p-3 rounded-lg">
-                <input type="password" id="loginPassword" placeholder="Password" required class="w-full border p-3 rounded-lg">
-                <div class="flex justify-between items-center text-sm">
-                    <a href="#" onclick="showModal('forgot-modal'); hideModals(); return false;" class="text-orange-600 hover:underline">Forgot Password?</a>
-                </div>
-                <button type="submit" class="w-full bg-orange-600 text-white p-3 rounded-lg font-semibold hover:bg-orange-700">Login</button>
+                <input type="text" id="loginPhone" placeholder="Phone Number" required class="w-full border p-3.5 rounded-xl text-sm">
+                <input type="password" id="loginPassword" placeholder="Password" required class="w-full border p-3.5 rounded-xl text-sm">
+                <button type="submit" class="w-full bg-orange-600 text-white p-3.5 rounded-xl font-semibold hover:bg-orange-700 transition">Login</button>
             </form>
             <button onclick="hideModals()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">✕</button>
         </div>
     </div>
 
     <div id="register-modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-        <div class="bg-white p-8 rounded-2xl w-full max-w-md relative">
+        <div class="bg-white p-8 rounded-3xl w-full max-w-md relative shadow-2xl">
             <h3 class="text-xl font-bold mb-4">Create Account</h3>
             <form onsubmit="handleRegister(event)" class="space-y-4">
-                <input type="text" id="regName" placeholder="Full Name" required class="w-full border p-3 rounded-lg">
-                <input type="text" id="regPhone" placeholder="Phone Number" required class="w-full border p-3 rounded-lg">
-                <input type="password" id="regPassword" placeholder="Password" required class="w-full border p-3 rounded-lg">
-                <select id="regRole" class="w-full border p-3 rounded-lg">
+                <input type="text" id="regName" placeholder="Full Name" required class="w-full border p-3.5 rounded-xl text-sm">
+                <input type="text" id="regPhone" placeholder="Phone Number" required class="w-full border p-3.5 rounded-xl text-sm">
+                <input type="password" id="regPassword" placeholder="Password" required class="w-full border p-3.5 rounded-xl text-sm">
+                <select id="regRole" class="w-full border p-3.5 rounded-xl text-sm">
                     <option value="customer">Customer</option>
                     <option value="owner">Tiffin Service Owner</option>
                 </select>
-                <button type="submit" class="w-full bg-orange-600 text-white p-3 rounded-lg font-semibold hover:bg-orange-700">Register</button>
+                <button type="submit" class="w-full bg-orange-600 text-white p-3.5 rounded-xl font-semibold hover:bg-orange-700 transition">Register</button>
             </form>
             <button onclick="hideModals()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">✕</button>
         </div>
     </div>
 
-    <div id="forgot-modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-        <div class="bg-white p-8 rounded-2xl w-full max-w-md relative">
-            <h3 class="text-xl font-bold mb-4">Reset Password</h3>
-            <form onsubmit="handleForgotPassword(event)" class="space-y-4">
-                <input type="text" id="forgotPhone" placeholder="Registered Phone Number" required class="w-full border p-3 rounded-lg">
-                <input type="password" id="forgotNewPassword" placeholder="New Password" required class="w-full border p-3 rounded-lg">
-                <button type="submit" class="w-full bg-orange-600 text-white p-3 rounded-lg font-semibold hover:bg-orange-700">Update Password</button>
+    <div id="transfer-modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div class="bg-white p-8 rounded-3xl w-full max-w-md relative shadow-2xl">
+            <h3 class="text-xl font-bold mb-2">Mid-Cycle Transfer</h3>
+            <p class="text-xs text-slate-500 mb-4">Carry over plan and billing cycle to a new recipient.</p>
+            <form onsubmit="handleTransferSubmit(event)" class="space-y-4">
+                <input type="number" id="transferSubId" placeholder="Subscription ID to Transfer" required class="w-full border p-3.5 rounded-xl text-sm">
+                <input type="text" id="transferName" placeholder="New Recipient Name" required class="w-full border p-3.5 rounded-xl text-sm">
+                <input type="text" id="transferPhone" placeholder="New Recipient Phone" required class="w-full border p-3.5 rounded-xl text-sm">
+                <input type="password" id="transferPassword" placeholder="New Account Password" required class="w-full border p-3.5 rounded-xl text-sm">
+                <button type="submit" class="w-full bg-purple-600 text-white p-3.5 rounded-xl font-semibold hover:bg-purple-700 transition">Execute Transfer</button>
             </form>
-            <button onclick="hideModals(); showModal('login-modal');" class="mt-4 text-sm text-slate-500 hover:underline block text-center">Back to Login</button>
+            <button onclick="hideModals()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">✕</button>
+        </div>
+    </div>
+
+    <div id="import-modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div class="bg-white p-8 rounded-3xl w-full max-w-lg relative shadow-2xl">
+            <h3 class="text-xl font-bold mb-2">Messy Customer List Importer</h3>
+            <p class="text-xs text-slate-500 mb-4">Paste JSON array of customer objects with `name` and `phone` properties.</p>
+            <form onsubmit="handleImportSubmit(event)" class="space-y-4">
+                <textarea id="importJson" rows="6" placeholder='[{"name": "Amit Kumar", "phone": "9876543210"}, {"name": "Priya", "phone": "9123456789"}]' required class="w-full border p-3.5 rounded-xl text-xs font-mono"></textarea>
+                <button type="submit" class="w-full bg-emerald-600 text-white p-3.5 rounded-xl font-semibold hover:bg-emerald-700 transition">Run Import & Dedup</button>
+            </form>
+            <div id="importResultBox" class="mt-4 hidden p-4 bg-emerald-50 text-emerald-800 rounded-xl text-xs font-mono"></div>
             <button onclick="hideModals()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">✕</button>
         </div>
     </div>
 
     <div id="feedback-modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-        <div class="bg-white p-8 rounded-2xl w-full max-w-md relative">
+        <div class="bg-white p-8 rounded-3xl w-full max-w-md relative shadow-2xl">
             <h3 class="text-xl font-bold mb-4">Rate Today's Tiffin</h3>
             <form onsubmit="handleFeedbackSubmit(event)" class="space-y-4">
-                <select id="feedbackRating" required class="w-full border p-3 rounded-lg">
+                <select id="feedbackRating" required class="w-full border p-3.5 rounded-xl text-sm">
                     <option value="5">⭐⭐⭐⭐⭐ (5/5 - Excellent)</option>
                     <option value="4">⭐⭐⭐⭐ (4/5 - Very Good)</option>
                     <option value="3">⭐⭐⭐ (3/5 - Average)</option>
                     <option value="2">⭐⭐ (2/5 - Below Average)</option>
                     <option value="1">⭐ (1/5 - Poor)</option>
                 </select>
-                <textarea id="feedbackComment" placeholder="Write your review or comment..." class="w-full border p-3 rounded-lg" rows="3"></textarea>
-                <button type="submit" class="w-full bg-orange-600 text-white p-3 rounded-lg font-semibold hover:bg-orange-700">Submit Review</button>
+                <textarea id="feedbackComment" placeholder="Write your review or comment..." class="w-full border p-3.5 rounded-xl text-sm" rows="3"></textarea>
+                <button type="submit" class="w-full bg-orange-600 text-white p-3.5 rounded-xl font-semibold hover:bg-orange-700 transition">Submit Review</button>
             </form>
             <button onclick="hideModals()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">✕</button>
         </div>
@@ -203,7 +233,7 @@
         let currentUser = JSON.parse(localStorage.getItem('user')) || null;
 
         async function initApp() {
-            loadPublicMenu();
+            loadPublicMenus();
             if (token && currentUser) {
                 document.getElementById('landing-view').classList.add('hidden');
                 document.getElementById('dashboard-view').classList.remove('hidden');
@@ -211,7 +241,7 @@
                 document.getElementById('welcome-msg').innerText = currentUser.role === 'owner' ? 'Enterprise Pro Owner Dashboard' : 'My Subscription & Billing';
                 
                 if (currentUser.role === 'owner') {
-                    document.getElementById('owner-menu-card').classList.remove('hidden');
+                    document.getElementById('owner-control-center').classList.remove('hidden');
                 }
                 loadAnalytics();
                 loadCustomers();
@@ -219,11 +249,29 @@
             }
         }
 
-        async function loadPublicMenu() {
-            const res = await fetch('/api/menu');
-            const menu = await res.json();
-            document.getElementById('publicMenuTitle').innerText = menu.title;
-            document.getElementById('publicMenuItems').innerText = menu.items;
+        async function loadPublicMenus() {
+            const res = await fetch('/api/menus');
+            const menus = await res.json();
+            const container = document.getElementById('publicWeeklyMenuGrid');
+            container.innerHTML = '';
+            menus.forEach(m => {
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden flex flex-col justify-between hover:shadow-md transition";
+                card.innerHTML = `
+                    <div>
+                        <img src="${m.image_url}" alt="${m.title}" class="h-40 w-full object-cover">
+                        <div class="p-4">
+                            <span class="text-xs bg-orange-100 text-orange-700 font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">${m.day_of_week}</span>
+                            <h4 class="font-bold text-base mt-2 text-slate-900">${m.title}</h4>
+                            <p class="text-xs text-slate-500 mt-1">${m.items}</p>
+                        </div>
+                    </div>
+                    <div class="p-4 pt-0">
+                        <span class="text-xs font-semibold text-green-600 bg-green-50 px-2.5 py-1 rounded-lg block text-center">Fresh & Hot 🚚</span>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
         }
 
         async function loadAnalytics() {
@@ -261,6 +309,55 @@
             });
         }
 
+        async function triggerClock() {
+            const res = await fetch('/api/clock', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                body: JSON.stringify({ date: new Date().toISOString().split('T')[0] })
+            });
+            const data = await res.json();
+            if (res.ok) alert(`Clock advanced successfully! ${data.notificationsSent} delivery notification(s) dispatched to outbox.`);
+            else alert(data.error);
+        }
+
+        async function handleTransferSubmit(e) {
+            e.preventDefault();
+            const res = await fetch('/api/subscription/transfer', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                body: JSON.stringify({
+                    oldSubscriptionId: parseInt(document.getElementById('transferSubId').value),
+                    newCustomerName: document.getElementById('transferName').value,
+                    newCustomerPhone: document.getElementById('transferPhone').value,
+                    newPassword: document.getElementById('transferPassword').value
+                })
+            });
+            const data = await res.json();
+            if (res.ok) { alert(data.message); hideModals(); loadCustomers(); loadAnalytics(); } else alert(data.error);
+        }
+
+        async function handleImportSubmit(e) {
+            e.preventDefault();
+            try {
+                const parsedData = JSON.parse(document.getElementById('importJson').value);
+                const res = await fetch('/api/import/customers', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                    body: JSON.stringify({ rawData: parsedData })
+                });
+                const data = await res.json();
+                if (res.ok) {
+                    const box = document.getElementById('importResultBox');
+                    box.classList.remove('hidden');
+                    box.innerText = `Import Report:\n- Imported: ${data.report.imported}\n- Deduped: ${data.report.deduped}\n- Rejected: ${data.report.rejected}\n- Total Processed: ${data.report.totalProcessed}`;
+                    loadCustomers();
+                    loadAnalytics();
+                } else alert(data.error);
+            } catch (err) {
+                alert('Invalid JSON format. Please check your data array.');
+            }
+        }
+
         async function handleFeedbackSubmit(e) {
             e.preventDefault();
             const res = await fetch('/api/feedback', {
@@ -278,20 +375,6 @@
                 loadFeedbacks();
                 loadAnalytics();
             } else alert(data.error);
-        }
-
-        async function handleUpdateMenu(e) {
-            e.preventDefault();
-            const res = await fetch('/api/menu', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-                body: JSON.stringify({
-                    title: document.getElementById('menuTitleInput').value,
-                    items: document.getElementById('menuItemsInput').value
-                })
-            });
-            const data = await res.json();
-            if (res.ok) { alert(data.message); loadPublicMenu(); } else alert(data.error);
         }
 
         function showModal(id) { document.getElementById(id).classList.remove('hidden'); }
@@ -334,20 +417,6 @@
             } else alert(data.error);
         }
 
-        async function handleForgotPassword(e) {
-            e.preventDefault();
-            const res = await fetch('/api/forgot-password', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    phone: document.getElementById('forgotPhone').value,
-                    newPassword: document.getElementById('forgotNewPassword').value
-                })
-            });
-            const data = await res.json();
-            if (res.ok) { alert(data.message); hideModals(); showModal('login-modal'); } else alert(data.error);
-        }
-
         function logout() { localStorage.clear(); location.reload(); }
 
         async function loadCustomers() {
@@ -366,15 +435,15 @@
 
             result.data.forEach(item => {
                 const tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-50";
+                tr.className = "hover:bg-slate-50 transition";
                 tr.innerHTML = `
                     <td class="p-4 font-medium">${item.name}</td>
                     <td class="p-4 text-slate-600">${item.phone}</td>
-                    <td class="p-4"><span class="px-2 py-1 rounded text-xs font-semibold ${item.status === 'active' ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'}">${item.status.toUpperCase()}</span></td>
+                    <td class="p-4"><span class="px-2.5 py-1 rounded-full text-xs font-semibold ${item.status === 'active' ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'}">${item.status.toUpperCase()}</span></td>
                     <td class="p-4">${item.total_paused_days} days</td>
                     <td class="p-4 font-bold text-orange-600">₹${item.proratedBill} <span class="text-xs font-normal text-slate-400">(Base: ₹${item.plan_price})</span></td>
                     <td class="p-4 text-right">
-                        <button onclick="toggleSubscription(${item.sub_id}, '${item.status === 'active' ? 'paused' : 'active'}')" class="text-xs px-3 py-1.5 rounded border font-medium ${item.status === 'active' ? 'bg-amber-50 text-amber-700 border-amber-200' : 'bg-green-50 text-green-700 border-green-200'}">
+                        <button onclick="toggleSubscription(${item.sub_id}, '${item.status === 'active' ? 'paused' : 'active'}')" class="text-xs px-3 py-1.5 rounded-xl border font-medium ${item.status === 'active' ? 'bg-amber-50 text-amber-700 border-amber-200 hover:bg-amber-100' : 'bg-green-50 text-green-700 border-green-200 hover:bg-green-100'} transition">
                             ${item.status === 'active' ? 'Pause Tiffin' : 'Resume Tiffin'}
                         </button>
                     </td>
